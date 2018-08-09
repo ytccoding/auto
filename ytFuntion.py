@@ -13,7 +13,7 @@ testdayTime  = time.strftime("%y_%m_%d_%H_%M_%S")
 
 funtionError = []
 funtionCountPng = 1
-#修改ELEMENT WAIT秒數 10>5
+
 class accountSetting():
     def __init__(self ,username = "" ,password = "" ,safePassword = ""):
         self.username = str(username).strip()

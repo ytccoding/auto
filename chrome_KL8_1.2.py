@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from openpyxl import workbook ,load_workbook ,Workbook
 import os ,time ,random ,ytFuntion
-#1.2修改單一投注數,增進效能,修改確認投注方式
+#1.2修改單一投注數,增進效能,修改確認投注方式,判斷彩種是否開放
 
 def submitCheck():
     period = []
@@ -52,7 +52,7 @@ test_web = ytFuntion.test_web(webdriver.Chrome(executable_path='chromedriver.exe
 error = ["ERROR:"]
 
 print("所有快樂8全餐投注")
-wb = load_workbook("快樂彩投注用.xlsx")
+wb = load_workbook("快樂8投注用.xlsx")
 sheet = wb["快樂彩"] # 獲取一張表
 testNumber = input("測試站點序號:").strip()
 for i in range(1,len(sheet["B"])+1):
@@ -81,8 +81,16 @@ error.append(test_web.elementClick("[class='mainColorBtn submitBtnBig ClickShade
 sleep(5)
 test_web.webDriver.get(url) #目標網址
 
+html_source = test_web.webDriver.page_source
 if test_web.webDriver.current_url != url:
-    input("此彩種未開放或URL有誤,請檢查,按enter離開。")
+    input("此URL有誤,請檢查,按enter離開。")
+    test_web.webDriver.quit()
+elif "您所访问的彩种不存在，即将返回购彩大厅" in html_source:
+    input("此彩種未開放,請檢查,按enter離開。")
+    test_web.webDriver.quit()
+elif "Unexpected token u in JSON at position 0" in html_source:
+    input("此彩種未獎金模板錯誤或是HOST錯誤,請檢查,按enter離開。")
+    test_web.webDriver.quit() 
     
 period = []
 
