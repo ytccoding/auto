@@ -7,7 +7,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 from openpyxl import workbook ,load_workbook ,Workbook
 import os ,time ,random ,ytFuntion
-
+#0810,waitelement10->30,傳統時時彩更多玩法修復
 testdayFile = time.strftime("%y_%m_%d")
 testdayTime  = time.strftime("%y_%m_%d_%H_%M_%S")
 
@@ -118,7 +118,7 @@ class test_web(LocalStorage):
         while clickOk == "NG":
             self.periodConfirm()
             try:
-                self.elementsClickOne("span[id='morePlay'] li" ,6 ,i)
+                self.elementsClickOne("ul[class='morePlay'] li" ,6 ,i)
                 #self.webDriver.find_element_by_class_name("morePlay").find_elements_by_tag_name("li")[i].click() #固定寫法
                 clickOk = "OK"
             except:
@@ -261,49 +261,49 @@ class test_web(LocalStorage):
             elementText = str(elementText).strip()
             delayTime = int(str(delayTime).strip())
             if link_type == 1:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.ID,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.ID,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_id(elementText).click()
             elif link_type == 2:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_class_name(elementText).click()
             elif link_type == 3:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.LINK_TEXT,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_link_text(elementText).click()
             elif link_type == 4:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_partial_link_text(elementText).click()
             elif link_type == 5:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.NAME,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_name(elementText).click()
             elif link_type == 6:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.CSS_SELECTOR,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_css_selector(elementText).click()
             elif link_type == 7:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.TAG_NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.TAG_NAME,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_tag_name(elementText).click()
             elif link_type == 8:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.XPATH,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.XPATH,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
@@ -427,28 +427,28 @@ class test_web(LocalStorage):
             link_type = int(str(link_type).strip())
             elementText = str(elementText).strip()
             if link_type == 1:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.ID,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.ID,elementText)))
                 return self.webDriver.find_element_by_id(elementText)
             elif link_type == 2:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME,elementText)))
                 return self.webDriver.find_element_by_class_name(elementText)
             elif link_type == 3:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.LINK_TEXT,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT,elementText)))
                 return self.webDriver.find_element_by_link_text(elementText)
             elif link_type == 4:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT,elementText)))
                 return self.webDriver.find_element_by_partial_link_text(elementText)
             elif link_type == 5:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.NAME,elementText)))
                 return self.webDriver.find_element_by_name(elementText)
             elif link_type == 6:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.CSS_SELECTOR,elementText)))
                 return self.webDriver.find_element_by_css_selector(elementText)
             elif link_type == 7:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.TAG_NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.TAG_NAME,elementText)))
                 return self.webDriver.find_element_by_tag_name(elementText)
             elif link_type == 8:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.XPATH,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.XPATH,elementText)))
                 return self.webDriver.find_element_by_xpath(elementText)
             else:
                 funtionError.append(self.webUrl() + ":" + elementText + "或" + str(link_type) + "取得元素錯誤,")
@@ -465,49 +465,49 @@ class test_web(LocalStorage):
             delayTime = int(str(delayTime).strip())
             text = str(text).strip()
             if link_type == 1:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.ID,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.ID,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_id(elementText).send_keys(text)
             elif link_type == 2:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.CLASS_NAME,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_class_name(elementText).send_keys(text)
             elif link_type == 3:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.LINK_TEXT,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.LINK_TEXT,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_link_text(elementText).send_keys(text)
             elif link_type == 4:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.PARTIAL_LINK_TEXT,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_partial_link_text(elementText).send_keys(text)
             elif link_type == 5:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.NAME,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_name(elementText).send_keys(text)
             elif link_type == 6:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.CSS_SELECTOR,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_css_selector(elementText).send_keys(text)
             elif link_type == 7:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.TAG_NAME,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.TAG_NAME,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
                 self.webDriver.find_element_by_tag_name(elementText).send_keys(text)
             elif link_type == 8:
-                WebDriverWait(self.webDriver, 10).until(EC.visibility_of_element_located((By.XPATH,elementText)))
+                WebDriverWait(self.webDriver, 30).until(EC.visibility_of_element_located((By.XPATH,elementText)))
                 if delayTime != 0:
                     sleep(delayTime)
                 self.periodConfirm()
@@ -567,18 +567,6 @@ class test_web(LocalStorage):
                 break
         return periodDetail
 
-    '''def sheetDetail(self): #填表
-        periodDetail = self.periodDetail()
-        for i in range(int(len(periodDetail)/8)):
-            sheetDetail["B"+str(len(sheetDetail["B"]) + 1)].value = periodDetail[8*i]
-            sheetDetail["C"+str(len(sheetDetail["B"]))].value = periodDetail[1 + 8*i]
-            sheetDetail["D"+str(len(sheetDetail["B"]))].value = periodDetail[2 + 8*i]
-            sheetDetail["E"+str(len(sheetDetail["B"]))].value = periodDetail[3 + 8*i]
-            sheetDetail["F"+str(len(sheetDetail["B"]))].value = periodDetail[4 + 8*i]
-            sheetDetail["G"+str(len(sheetDetail["B"]))].value = periodDetail[5 + 8*i]
-            sheetDetail["H"+str(len(sheetDetail["B"]))].value = periodDetail[6 + 8*i]
-            sheetDetail["I"+str(len(sheetDetail["B"]))].value = periodDetail[7 + 8*i]'''
-
     def CTK3_r(self ,elementText = "" ,link_type = None ,max_Td = "0" ,max_Money = "0"): #傳統快3
         money = [" "]
         link_type = str(link_type).strip()
@@ -634,8 +622,6 @@ class test_web(LocalStorage):
         for i in range(len(money_box)):
             self.periodConfirm()
             money.append(self.elements("order_type" ,2)[i].text)
-            #money.append(self.element("div[class='checkedListCon']" ,6).find_elements_by_tag_name("td")[1 + 7*i].text)
-            #money.append(self.element("div[class='checkedListCon']" ,6).find_elements_by_tag_name("td")[2 + 7*i].text)
             money.append(self.webDriver.find_element_by_css_selector("div[class='checkedListCon']").find_elements_by_tag_name("td")[1 + 7*i].text)
             money.append(self.webDriver.find_element_by_css_selector("div[class='checkedListCon']").find_elements_by_tag_name("td")[2 + 7*i].text)
         return money

@@ -6,7 +6,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 from openpyxl import workbook ,load_workbook ,Workbook
 import os ,time ,random ,ytFuntion
-#1.2修改單一投注數,增進效能,修改確認投注方式,判斷彩種是否開放
+#1.2修改單一投注數,增進效能,修改確認投注方式,判斷彩種是否開放,等待時間,登入時間
+
 def submitCheck():
     period = []
     sheet_money["B"+str(len(sheet_money["B"]) + 1)].value = test_web.webPage()[i].text
@@ -42,20 +43,31 @@ def submitCheck():
         sheet_money.cell(row = sheet_row ,column = k + 7).value = period[1][k]
     wb_money.save(os.getcwd() + "\\" + str(testdayFile) + "\\" + str(testdayTime) + "_賽車" + "投注金額.xlsx")
     
-    
+print("賽車全玩法投注")
+testNumber = input("測試站點序號:").strip()
+accountNumber = input("測試帳號序號:").strip()
+
 test_web = ytFuntion.test_web(webdriver.Chrome(executable_path='chromedriver.exe'))
 error = ["ERROR:"]
 
-print("所有賽車全餐投注")
 wb = load_workbook("賽車投注用.xlsx")
 sheet = wb["賽車"] # 獲取一張表
-testNumber = input("測試站點序號:").strip()
+wbAccount = load_workbook("前台帳號.xlsx")
+sheetAccount = wbAccount["帳號"] # 獲取一張表
+
 for i in range(1,len(sheet["B"])+1):
     if str(sheet["B" + str(i)].value).strip() == str(testNumber):
         url = str(sheet["E" + str(i)].value).strip()
-        Account = str(sheet["F" + str(i)].value).strip()
-        Password = str(sheet["G" + str(i)].value).strip()
-        webPageSelect = str(sheet["I" + str(i)].value).strip()
+        webPageSelect = str(sheet["G" + str(i)].value).strip()
+        if str(sheet["F" + str(i)].value).strip() == "None":
+            waitSec = 600
+        else:
+            waitSec = str(sheet["F" + str(i)].value).strip()
+
+for i in range(1,len(sheetAccount["B"])+1):
+    if str(sheetAccount["B" + str(i)].value).strip() == str(accountNumber):
+        Account = str(sheetAccount["D" + str(i)].value).strip()
+        Password = str(sheetAccount["E" + str(i)].value).strip()
         
 print("使用帳號:" + Account)
 
@@ -73,7 +85,13 @@ test_web.elementSendKeys("input[tag=帐号]" ,6 ,text = Account)
 test_web.elementSendKeys("input[tag=密码]" ,6 ,text = Password)
 
 error.append(test_web.elementClick("[class='mainColorBtn submitBtnBig ClickShade']",6))
-sleep(5)
+#sleep(5)
+timeCount = 0
+while(test_web.webDriver.current_url != url):
+    sleep(1)
+    timeCount = timeCount + 1
+    if timeCount >= 30:
+        break
 test_web.webDriver.get(url) #目標網址
 
 html_source = test_web.webDriver.page_source
@@ -312,7 +330,7 @@ for i in range(test_web.webPageSelect(webPageSelect)): #所有分頁
 
 
 
-sleep(600)#等全部開獎完畢
+sleep(waitSec)#等全部開獎完畢
 test_web.elementClick("更多>>" ,3) #投注明細
 
 periodDetail = test_web.periodDetail()
