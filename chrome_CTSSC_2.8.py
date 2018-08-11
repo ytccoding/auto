@@ -122,7 +122,7 @@ chkBox = ["组选三","组选六"]
 #全部全餐
 
 #1=ID,2=CLASS_NAME,3=LINK_TEXT,4=PARTIAL_LINK_TEXT,5=NAME,6=CSS_SELECTOR,7=TAG_NAME,8=XPATH
-'''
+
 for i in range(test_web.webPageSelect(webPageSelect)): #所有分頁
     if  webPageSelect != "1":
         test_web.webPageClick(i ,"a[class ='betNavtab right']" ,6) #切換分頁
@@ -169,5 +169,5 @@ if len(error) != 1:
         Error.write(str(i).encode('utf-8'))
     Error.close()
 
-test_web.webDriver.quit()'''
+test_web.webDriver.quit()
 
