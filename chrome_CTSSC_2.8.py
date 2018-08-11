@@ -12,41 +12,43 @@ import os ,time ,random ,ytFuntion
 
 def submitCheck():
     period = []
+    if test_web.webPlay()[j].text in chkBox:
+        return "NG"
+    
     for k in range(len(test_web.webPlayBranch())):#該分頁所有可點選玩法分支都點
         test_web.webPlayBranchClick(k)
         period.append(test_web.webPlay()[j].text + ":" + test_web.webPlayBranch()[k].text)
         if test_web.webPlay()[j].text not in chkBox:
+            #sleep(1)
+            #input("???")
             period.append(test_web.CTK3_r("input[type=text]" ,6 ,max_Money = "1")) #投注金額
-            
-    if test_web.webPlay()[j].text in chkBox:
-        return 
 
-    sheet_money["B"+str(len(sheet_money["B"]) + 1)].value = test_web.webPage()[i].text
-    sheet_money["C"+str(len(sheet_money["B"]))].value = Account
+        sheet_money["B"+str(len(sheet_money["B"]) + 1)].value = test_web.webPage()[i].text
+        sheet_money["C"+str(len(sheet_money["B"]))].value = Account
 
-    try:
-        period.insert(0 ,test_web.timeTitle()) #期號
-    except:
-        period.insert(0 ,"極速傳統時時彩平常沒有期號") #期號
+        try:
+            period.insert(0 ,test_web.timeTitle()) #期號
+        except:
+            period.insert(0 ,"極速傳統時時彩平常沒有期號") #期號
 
-    submitCheck = True
-    while(submitCheck):
-        test_web.elementClick("button[class='btn btn-danger fl bet-add ']" ,6)
-        #sleep(2)
-        if test_web.elementClick("//span[.='确认投注']" ,8) != "NG":
+        submitCheck = True
+        while(submitCheck):
+            test_web.elementClick("button[class='btn btn-danger fl bet-add ']" ,6)
             #sleep(2)
-            if test_web.submitCheckOK() != "NG":
-                test_web.elementClick("//span[.='确定']" ,8)
-                submitCheck = False
+            if test_web.elementClick("//span[.='确认投注']" ,8) != "NG":
+                #sleep(2)
+                if test_web.submitCheckOK() != "NG":
+                    test_web.elementClick("//span[.='确定']" ,8)
+                    submitCheck = False
 
-    sheet_money["D"+str(len(sheet_money["B"]))].value = time.strftime("%y_%m_%d") #投注時間
-    sheet_money["E"+str(len(sheet_money["B"]))].value = time.strftime("%H_%M_%S") #投注時間
-    sheet_money["F"+str(len(sheet_money["B"]))].value = period[0] #投注期號
+        sheet_money["D"+str(len(sheet_money["B"]))].value = time.strftime("%y_%m_%d") #投注時間
+        sheet_money["E"+str(len(sheet_money["B"]))].value = time.strftime("%H_%M_%S") #投注時間
+        sheet_money["F"+str(len(sheet_money["B"]))].value = period[0] #投注期號
 
-    sheet_row = len(sheet_money["B"]) #投注金額填表
-    for k in range(len(period[2])):
-        sheet_money.cell(row = sheet_row ,column = k + 7).value = period[2][k]
-    wb_money.save(os.getcwd() + "\\" + str(testdayFile) + "\\" + str(testdayTime) + "_傳統彩" + "投注金額.xlsx")
+        sheet_row = len(sheet_money["B"]) #投注金額填表
+        for k in range(len(period[2])):
+            sheet_money.cell(row = sheet_row ,column = k + 7).value = period[2][k]
+        wb_money.save(os.getcwd() + "\\" + str(testdayFile) + "\\" + str(testdayTime) + "_傳統彩" + "投注金額.xlsx")
 
 print("傳統彩全玩法投注")
 testNumber = input("測試站點序號:").strip()
@@ -170,4 +172,3 @@ if len(error) != 1:
     Error.close()
 
 test_web.webDriver.quit()
-
