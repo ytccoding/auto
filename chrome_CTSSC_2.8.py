@@ -12,6 +12,15 @@ import os ,time ,random ,ytFuntion
 
 def submitCheck():
     period = []
+    for k in range(len(test_web.webPlayBranch())):#該分頁所有可點選玩法分支都點
+        test_web.webPlayBranchClick(k)
+        period.append(test_web.webPlay()[j].text + ":" + test_web.webPlayBranch()[k].text)
+        if test_web.webPlay()[j].text not in chkBox:
+            period.append(test_web.CTK3_r("input[type=text]" ,6 ,max_Money = "1")) #投注金額
+            
+    if test_web.webPlay()[j].text in chkBox:
+        return 
+
     sheet_money["B"+str(len(sheet_money["B"]) + 1)].value = test_web.webPage()[i].text
     sheet_money["C"+str(len(sheet_money["B"]))].value = Account
 
@@ -38,7 +47,6 @@ def submitCheck():
     for k in range(len(period[2])):
         sheet_money.cell(row = sheet_row ,column = k + 7).value = period[2][k]
     wb_money.save(os.getcwd() + "\\" + str(testdayFile) + "\\" + str(testdayTime) + "_傳統彩" + "投注金額.xlsx")
-    period = []
 
 print("傳統彩全玩法投注")
 testNumber = input("測試站點序號:").strip()
@@ -59,7 +67,7 @@ for i in range(1,len(sheet["B"])+1):
         if str(sheet["F" + str(i)].value).strip() == "None":
             waitSec = 600
         else:
-            waitSec = str(sheet["F" + str(i)].value).strip()
+            waitSec = int(str(sheet["F" + str(i)].value).strip())
 
 for i in range(1,len(sheetAccount["B"])+1):
     if str(sheetAccount["B" + str(i)].value).strip() == str(accountNumber):
@@ -114,7 +122,7 @@ chkBox = ["组选三","组选六"]
 #全部全餐
 
 #1=ID,2=CLASS_NAME,3=LINK_TEXT,4=PARTIAL_LINK_TEXT,5=NAME,6=CSS_SELECTOR,7=TAG_NAME,8=XPATH
-
+'''
 for i in range(test_web.webPageSelect(webPageSelect)): #所有分頁
     if  webPageSelect != "1":
         test_web.webPageClick(i ,"a[class ='betNavtab right']" ,6) #切換分頁
@@ -122,12 +130,13 @@ for i in range(test_web.webPageSelect(webPageSelect)): #所有分頁
     for j in range(len(test_web.webPlay())): #該分頁所有可點選玩法都點
         if j < 10:
             test_web.webPlayClick(j)
-            for k in range(len(test_web.webPlayBranch())):#該分頁所有可點選玩法分支都點
-                test_web.webPlayBranchClick(k)
-                period.append(test_web.webPlay()[j].text + ":" + test_web.webPlayBranch()[k].text)
-                if test_web.webPlay()[j].text not in chkBox:
-                    period.append(test_web.CTK3_r("input[type=text]" ,6 ,max_Money = "1")) #投注金額
-                    submitCheck()
+            submitCheck()
+            #for k in range(len(test_web.webPlayBranch())):#該分頁所有可點選玩法分支都點
+                #test_web.webPlayBranchClick(k)
+                #period.append(test_web.webPlay()[j].text + ":" + test_web.webPlayBranch()[k].text)
+                #if test_web.webPlay()[j].text not in chkBox:
+                    #period.append(test_web.CTK3_r("input[type=text]" ,6 ,max_Money = "1")) #投注金額
+                    
                     #submitCheck = True
                     #while(submitCheck):
                         #test_web.elementClick("button[class='btn btn-danger fl bet-add ']" ,6)
@@ -140,12 +149,7 @@ for i in range(test_web.webPageSelect(webPageSelect)): #所有分頁
         elif j == 10:
             for m in range(8):
                 test_web.morePlayClick(m)
-                for k in range(len(test_web.webPlayBranch())):#該分頁所有可點選玩法分支都點
-                    test_web.webPlayBranchClick(k)
-                    period.append(test_web.webPlay()[j].text + ":" + test_web.webPlayBranch()[k].text)
-                    if test_web.webPlay()[j].text not in chkBox:
-                        period.append(test_web.CTK3_r("input[type=text]" ,6 ,max_Money = "1")) #投注金額
-                        submitCheck()
+                submitCheck()
                         
                   
 sleep(waitSec)#等全部開獎完畢
@@ -165,5 +169,5 @@ if len(error) != 1:
         Error.write(str(i).encode('utf-8'))
     Error.close()
 
-test_web.webDriver.quit()
+test_web.webDriver.quit()'''
 

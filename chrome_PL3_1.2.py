@@ -64,7 +64,7 @@ for i in range(1,len(sheet["B"])+1):
         if str(sheet["F" + str(i)].value).strip() == "None":
             waitSec = 600
         else:
-            waitSec = str(sheet["F" + str(i)].value).strip()
+            waitSec = int(str(sheet["F" + str(i)].value).strip())
 
 for i in range(1,len(sheetAccount["B"])+1):
     if str(sheetAccount["B" + str(i)].value).strip() == str(accountNumber):
