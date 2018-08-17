@@ -169,7 +169,7 @@ for i in range(test_web.webPageSelect(webPageSelect)): #所有分頁
            elif test_web.webPlayBranch()[k].text in boxList1:#["二肖连","三肖连","四肖连","合肖中","合肖不中","二尾连","三尾连","四尾连"]
                for m in range(len(test_web.elements("ul[class='fix'] a[class='ClickShade']" ,6))):
                    test_web.elementsClickOne("ClickShade" ,2 ,m)
-                   if (m+1)%4 == 0:
+                   if (m+1)%4 == 0 and m != 0:
                        test_web.elementClick("betBtn" ,1)
                submitCheck()
            else:
