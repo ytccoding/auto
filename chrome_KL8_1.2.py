@@ -43,7 +43,7 @@ def submitCheck():
     sheet_row = len(sheet_money["B"]) #投注金額填表
     for k in range(len(period[1])):
         sheet_money.cell(row = sheet_row ,column = k + 7).value = period[1][k]
-    wb_money.save(os.getcwd() + "\\" + str(testdayFile) + "\\" + str(testdayTime) + "_快樂彩" + "投注金額.xlsx")
+    wb_money.save(os.getcwd() + "\\" + str(testdayFile) + "\\" + str(testdayTime) + "_快樂8" + "投注金額.xlsx")
 
 print("快樂8全玩法投注")
 testNumber = input("測試站點序號:").strip()
